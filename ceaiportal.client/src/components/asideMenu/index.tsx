@@ -12,7 +12,7 @@ const items: MenuItem[] = [
   {
     key: "agents",
     label: "Agents",
-    children: agentsData.map(({ id, name, icon }) => ({
+    children: agentsData?.map(({ id, name, icon }) => ({
       key: `/agents/${id}`,
       label: (
         <NavLink to={`/agents/${id}`} className={"menu-link"}>
