@@ -1,0 +1,33 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34525.116
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CEAIPortal.Server", "CEAIPortal.Server\CEAIPortal.Server.csproj", "{B566C977-1FBF-4298-919D-A14D98B941ED}"
+EndProject
+Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "ceaiportal.client", "ceaiportal.client\ceaiportal.client.esproj", "{155FEC37-D1DF-498A-AC2C-F1B43081B86F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B566C977-1FBF-4298-919D-A14D98B941ED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B566C977-1FBF-4298-919D-A14D98B941ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B566C977-1FBF-4298-919D-A14D98B941ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B566C977-1FBF-4298-919D-A14D98B941ED}.Release|Any CPU.Build.0 = Release|Any CPU
+		{155FEC37-D1DF-498A-AC2C-F1B43081B86F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{155FEC37-D1DF-498A-AC2C-F1B43081B86F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{155FEC37-D1DF-498A-AC2C-F1B43081B86F}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{155FEC37-D1DF-498A-AC2C-F1B43081B86F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{155FEC37-D1DF-498A-AC2C-F1B43081B86F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{155FEC37-D1DF-498A-AC2C-F1B43081B86F}.Release|Any CPU.Deploy.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {DCB8BE89-ED7C-4B92-8F6C-03DA94278988}
+	EndGlobalSection
+EndGlobal

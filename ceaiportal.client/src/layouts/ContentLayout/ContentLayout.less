@@ -1,0 +1,48 @@
+.content-layout {
+  // padding: 10px;
+  // background: #F6F8FA;
+  background: none;
+  .layout-sider {
+    // padding: 0 10px 0 0;
+    padding: 20px 0;
+    background: #f7f5f7;
+
+    .aside-menu-logo-block {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      .aside-menu-logo {
+        padding: 0 0 0 24px;
+        align-items: center;
+
+        .menu-logo-link {
+          display: flex;
+          align-items: center;
+          flex-direction: row;
+          color: #000;
+          font-weight: 600;
+          font-size: 14px;
+          gap: 5px;
+          .ant-image {
+            display: flex;
+            align-items: center;
+          }
+        }
+      }
+    }
+  }
+
+  .layout-content {
+    background: #fbfafb;
+    padding: 27px;
+    overflow: scroll;
+    height: 100%;
+
+    .content {
+      flex-direction: column;
+      height: 100%;
+      flex-wrap: nowrap;
+    }
+  }
+}

@@ -1,0 +1,6 @@
+@CEAIPortal.Server_HostAddress = http://localhost:5050
+
+GET {{CEAIPortal.Server_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
