@@ -88,7 +88,6 @@ const EmailModal: FC<{ open: boolean; onClose: () => void }> = ({
                 editing: true,
                 onChange: setBodyText,
                 enterIcon: null,
-                // autoSize: { minRows: 3, maxRows: 6 },
               }}
             >
               {bodyText}

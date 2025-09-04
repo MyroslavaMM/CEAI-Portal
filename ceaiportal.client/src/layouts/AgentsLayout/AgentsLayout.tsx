@@ -1,10 +1,5 @@
 import { Row, Typography, Image, Input, Button } from "antd";
-import {
-  useState,
-  type ChangeEvent,
-  type FC,
-  type PropsWithChildren,
-} from "react";
+import { useState, type FC, type PropsWithChildren } from "react";
 import "./AgentLayout.less";
 import RecentHistoryBlock from "../../components/recent-history-block";
 import Header from "../../components/header";
