@@ -1,5 +1,5 @@
 import { Avatar, Button, Row, Typography } from "antd";
-import { useState, type FC } from "react";
+import { type FC } from "react";
 import "./index.less";
 import { EllipsisOutlined } from "@ant-design/icons";
 const { Text } = Typography;
@@ -14,12 +14,13 @@ const getInitials = (name: string) => {
 };
 
 const AccountButton: FC = () => {
-  const [user, setUser] = useState("Teresa Nguyen");
   return (
     <Row className={"account-button-wrapper"}>
       <Row className={"account-avatar-wrapper"}>
-        <Avatar rootClassName={"account-avatar"}>{getInitials(user)}</Avatar>
-        <Text className={"account-name"}>{user}</Text>
+        <Avatar rootClassName={"account-avatar"}>
+          {getInitials("Teresa Nguyen")}
+        </Avatar>
+        <Text className={"account-name"}>Teresa Nguyen</Text>
       </Row>
       <Button
         rootClassName={"account-more-button"}
