@@ -1,2 +1,3 @@
 /Users/miroslavamartinuk/Documents/Любава/CEAIPortal/ceaiportal.client/obj/Debug/ceaiportal.client.esproj.CoreCompileInputs.cache
 /Users/miroslavamartinuk/Documents/Любава/CEAIPortal+Dotnet/ceaiportal.client/obj/Debug/ceaiportal.client.esproj.CoreCompileInputs.cache
+/Users/miroslavamartinuk/Documents/Любава/CEAI-Portal/ceaiportal.client/obj/Debug/ceaiportal.client.esproj.CoreCompileInputs.cache

@@ -65,7 +65,6 @@ const AsideMenu: FC = () => {
     <Menu
       rootClassName={"aside-menu"}
       mode="inline"
-      style={{ height: "100vh" }}
       items={items}
       selectedKeys={selectedKeys}
       openKeys={openKeys}

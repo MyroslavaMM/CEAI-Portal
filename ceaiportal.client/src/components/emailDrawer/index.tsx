@@ -278,7 +278,6 @@ const EmailDrawer: FC<{ open: boolean; onClose: () => void }> = ({
       },
     },
     onFocus: ({ editor }) => setActiveEditor(editor),
-    onUpdate: ({ editor }) => setSubjectText(editor.getHTML()),
   });
 
   const bodyEditor = useEditor({
@@ -290,13 +289,14 @@ const EmailDrawer: FC<{ open: boolean; onClose: () => void }> = ({
       },
     },
     onFocus: ({ editor }) => setActiveEditor(editor),
-    onUpdate: ({ editor }) => setBodyText(editor.getHTML()),
   });
 
   const handleSave = () => {
     setEditMode(false);
     const subjectHTML = subjectEditor?.getHTML();
     const bodyHTML = bodyEditor?.getHTML();
+    setBodyText(bodyHTML);
+    setSubjectText(subjectHTML);
     console.log("Subject HTML:", subjectHTML);
     console.log("Body HTML:", bodyHTML);
   };

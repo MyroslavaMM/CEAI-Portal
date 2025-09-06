@@ -5,6 +5,7 @@ import AsideMenu from "../../components/asideMenu/index";
 import menuLogo from "../../../public/logo/logo-mobile.svg";
 import { NavLink } from "react-router-dom";
 import { MenuUnfoldOutlined, MenuFoldOutlined } from "@ant-design/icons";
+import AccountButton from "../../components/accountButton";
 
 const ContentLayout: FC<PropsWithChildren> = ({ children }) => {
   const [collapsed, setCollapsed] = useState(false);
@@ -46,7 +47,12 @@ const ContentLayout: FC<PropsWithChildren> = ({ children }) => {
             </Fragment>
           )}
         </Row>
-        {!collapsed && <AsideMenu />}
+        {!collapsed && (
+          <Row>
+            <AsideMenu />
+            <AccountButton />
+          </Row>
+        )}{" "}
       </Layout.Sider>
       {collapsed && (
         <div
