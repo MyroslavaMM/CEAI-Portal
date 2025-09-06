@@ -1,19 +1,51 @@
+.dashboard-content-wrapper {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
 .dashboard-wrapper {
   flex-direction: column;
+  height: 100%;
+  flex-wrap: nowrap;
   .dashboard-header-wrapper {
     flex-direction: column;
     align-items: center;
-    margin-top: 20px;
     h1.dashboard-title {
-      margin: 0 0 10px 0;
+      margin: 0 0 20px 0;
       font-size: 34px;
+      text-align: center;
     }
   }
 
+  .dashboard-subtitle {
+    font-size: 18px;
+    text-align: center;
+    margin: 0;
+  }
+
+  .dashboard-about-section {
+    text-align: center;
+    font-size: 14px;
+    margin-top: 20px;
+    font-style: italic;
+  }
+
   .card-tools-wrapper {
-    margin-top: 200px;
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(1, 1fr);
     gap: 15px;
+    overflow: scroll;
+    max-height: 450px;
+  }
+
+  .anticon {
+    width: 14px;
+    height: 14px;
+  }
+
+  .tools-carousel-icon {
+    display: block;
+    margin: 0 auto;
   }
 }
