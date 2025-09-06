@@ -7,11 +7,13 @@ export const agentsData = [
     id: "1",
     icon: MagazineIcon,
     name: "Magazine Search Assistant",
+    type: "agents",
   },
   {
     id: "2",
     icon: TwoByTwoAssistantIcon,
     name: "TwoByTwo Assistant",
+    type: "agents",
   },
 ];
 
@@ -20,5 +22,6 @@ export const toolsData = [
     id: "1",
     icon: menuIcon,
     name: "TwoByTwoStewardship",
+    type: "tools",
   },
 ];

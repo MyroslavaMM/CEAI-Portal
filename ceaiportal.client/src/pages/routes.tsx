@@ -1,7 +1,11 @@
 import { lazy } from "react";
 import DefaultLayout from "../layouts/DefaultLayout/DefaultLayout";
-import TwoByTwoStewardship from "./tools/two-by-two-stewardship";
 const Agents = lazy(() => import("./agents/index"));
+const TwoByTwoStewardship = lazy(
+  () => import("./tools/two-by-two-stewardship/index")
+);
+const Dashboard = lazy(() => import("./dashboard/index"));
+
 const pagesRoutes = [
   {
     path: "",
@@ -9,7 +13,7 @@ const pagesRoutes = [
     children: [
       {
         path: "/",
-        element: <Agents />,
+        element: <Dashboard />,
       },
       {
         path: "/agents/:id",
