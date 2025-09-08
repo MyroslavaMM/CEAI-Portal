@@ -15,6 +15,18 @@ export const agentsData = [
     name: "TwoByTwo Assistant",
     type: "agents",
   },
+  {
+    id: "3",
+    icon: TwoByTwoAssistantIcon,
+    name: "TwoByTwo Assistant",
+    type: "agents",
+  },
+  {
+    id: "4",
+    icon: TwoByTwoAssistantIcon,
+    name: "TwoByTwo Assistant",
+    type: "agents",
+  },
 ];
 
 export const toolsData = [
