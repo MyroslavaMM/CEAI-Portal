@@ -3,6 +3,7 @@
   display: flex;
   align-items: center;
   justify-content: space-around;
+  flex-direction: column;
 }
 .dashboard-wrapper {
   flex-direction: column;
@@ -15,6 +16,7 @@
       margin: 0 0 20px 0;
       font-size: 34px;
       text-align: center;
+      max-width: 550px;
     }
   }
 
@@ -33,7 +35,7 @@
 
   .card-tools-wrapper {
     display: grid;
-    grid-template-columns: repeat(1, 1fr);
+    grid-template-columns: repeat(2, 1fr);
     gap: 15px;
     overflow: scroll;
     max-height: 450px;

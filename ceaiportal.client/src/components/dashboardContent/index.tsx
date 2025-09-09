@@ -6,7 +6,6 @@ const { Title, Paragraph } = Typography;
 import HomeIcon from "../../../public/icons/home.svg";
 import ToolsCard from "../toolsCard";
 import { agentsData, toolsData } from "../../data";
-import { DoubleRightOutlined } from "@ant-design/icons";
 
 const DashboardContent: FC = () => {
   const tools = agentsData.concat(toolsData);
@@ -14,7 +13,7 @@ const DashboardContent: FC = () => {
     <Row className={"dashboard-wrapper"}>
       <Header name={"Dashboard"} icon={HomeIcon} />
       <Row className={"dashboard-content-wrapper"}>
-        <Col span={10}>
+        <Col style={{ maxWidth: 600 }}>
           <Row className={"dashboard-header-wrapper"}>
             <Title className={"dashboard-title"} level={1}>
               Welcome to the Catholic Extension AI Portal
@@ -32,15 +31,7 @@ const DashboardContent: FC = () => {
             </Paragraph>
           </Row>
         </Col>
-        <Col span={11} className={"card-tools-col"}>
-          <DoubleRightOutlined
-            className={"tools-carousel-icon"}
-            style={{
-              transform: "rotate(270deg)",
-              marginBottom: 15,
-              opacity: 0.2,
-            }}
-          />
+        <Col className={"card-tools-col"}>
           <Row gutter={16} className={"card-tools-wrapper"}>
             {tools.map(({ name, icon, id, type }) => (
               <ToolsCard
@@ -51,14 +42,6 @@ const DashboardContent: FC = () => {
               />
             ))}
           </Row>
-          <DoubleRightOutlined
-            className={"tools-carousel-icon"}
-            style={{
-              transform: "rotate(90deg)",
-              marginTop: 15,
-              opacity: 0.2,
-            }}
-          />
         </Col>
       </Row>
     </Row>
