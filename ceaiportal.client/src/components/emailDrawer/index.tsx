@@ -27,11 +27,11 @@ import Underline from "@tiptap/extension-underline";
 const { Paragraph, Text } = Typography;
 
 const htmlContent = `
-<div style="font-family: Arial, sans-serif; line-height: 1.6; color: #333;">
+<div style="font-family: Arial, sans-serif; line-height: 1.6">
   <p style="margin: 0 0 16px 0;">Hi <strong>Mr. Sullivan</strong>,</p>
 
   <p style="margin: 0 0 16px 0;">
-    I wanted to take a moment to <span style="color:#0066cc; font-weight: bold;">thank you once again</span> for your generous gift on
+    I wanted to take a moment to <span font-weight: bold;">thank you once again</span> for your generous gift on
     <span style="font-style: italic;">July 29</span>. Your support continues to be a vital part of building vibrant Catholic communities in places that need it most.
     I also appreciated our recent call where we got to share some updates – I hope you found it meaningful.
   </p>
@@ -50,7 +50,7 @@ const htmlContent = `
   </p>
 
   <p style="margin: 0 0 16px 0;">
-    Thank you again for walking this journey with us. <span style="color:#0066cc;">Your friendship and commitment mean the world.</span>
+    Thank you again for walking this journey with us. <span>Your friendship and commitment mean the world.</span>
   </p>
 
   <p style="margin: 0;">
@@ -205,7 +205,7 @@ const MenuBar = ({ editor }: { editor: Editor }) => {
   return (
     <div className="control-group">
       <div className="button-group">
-        <Dropdown menu={{ items: headerItems }} trigger={["click"]}>
+        <Dropdown menu={{ items: headerItems }}>
           <Button>Heading</Button>
         </Dropdown>
         <Button
