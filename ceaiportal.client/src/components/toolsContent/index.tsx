@@ -72,6 +72,7 @@ const ToolsContent: FC = () => {
       key: "contactId",
       render: (_: any, record: RowData) => (
         <NavLink
+          target={"_blank"}
           key={_.index}
           className={"table-cotact-id"}
           to={`https://app.virtuoussoftware.com/Generosity/Contact/View/${record.contactId}`}
