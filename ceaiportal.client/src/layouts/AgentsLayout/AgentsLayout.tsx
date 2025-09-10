@@ -4,7 +4,7 @@ import "./AgentLayout.less";
 import RecentHistoryBlock from "../../components/recent-history-block";
 import Header from "../../components/header";
 import { useParams } from "react-router-dom";
-import { agentsData } from "../../data";
+import { aiTools } from "../../data";
 import { ArrowRightOutlined } from "@ant-design/icons";
 
 const { Title } = Typography;
@@ -12,7 +12,7 @@ const { Title } = Typography;
 const AgentsLayout: FC<PropsWithChildren> = ({ children }) => {
   const { id } = useParams();
   const [message, setMessage] = useState<string>("");
-  const agent = agentsData.find((it) => it.id === id)!;
+  const agent = aiTools.find((it) => it.id === id)!;
 
   const messageEnterButton = (
     event: React.KeyboardEvent<HTMLTextAreaElement>

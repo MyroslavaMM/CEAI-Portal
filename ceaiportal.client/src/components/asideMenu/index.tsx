@@ -4,15 +4,15 @@ import { Menu, Image } from "antd";
 import ExpandArrow from "../../../public/icons/select-arrow.svg";
 import type { MenuProps } from "antd";
 import { NavLink, useLocation } from "react-router-dom";
-import { agentsData, toolsData } from "../../data";
+import { aiTools } from "../../data";
 
 type MenuItem = Required<MenuProps>["items"][number];
 
 const items: MenuItem[] = [
   {
-    key: "agents",
-    label: "Agents",
-    children: agentsData?.map(({ id, name, icon }) => ({
+    key: "aiTools",
+    label: "AI Tools",
+    children: aiTools?.map(({ id, name, icon }) => ({
       key: `/agents/${id}`,
       label: (
         <NavLink to={`/agents/${id}`} className={"menu-link"}>
@@ -23,22 +23,6 @@ const items: MenuItem[] = [
             src={icon}
             className={"menu-icon"}
           />
-          {name}
-        </NavLink>
-      ),
-    })),
-  },
-  {
-    type: "divider",
-  },
-  {
-    key: "tools",
-    label: "AI tools",
-    children: toolsData.map(({ id, name, icon }) => ({
-      key: `/tools/${id}`,
-      label: (
-        <NavLink to={"/tools/1"} className={"menu-link"}>
-          <Image width={20} height={20} preview={false} src={icon} />
           {name}
         </NavLink>
       ),
@@ -55,7 +39,7 @@ const AsideMenu: FC = () => {
     setSelectedKeys([location.pathname]);
 
     if (location.pathname.startsWith("/agents")) {
-      setOpenKeys(["agents"]);
+      setOpenKeys(["aiTools"]);
     } else if (location.pathname.startsWith("/tools")) {
       setOpenKeys(["tools"]);
     }

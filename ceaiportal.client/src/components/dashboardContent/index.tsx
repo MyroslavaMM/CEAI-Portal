@@ -5,10 +5,9 @@ import Header from "../header";
 const { Title, Paragraph } = Typography;
 import HomeIcon from "../../../public/icons/home.svg";
 import ToolsCard from "../toolsCard";
-import { agentsData, toolsData } from "../../data";
+import { aiTools } from "../../data";
 
 const DashboardContent: FC = () => {
-  const tools = agentsData.concat(toolsData);
   return (
     <Row className={"dashboard-wrapper"}>
       <Header name={"Dashboard"} icon={HomeIcon} />
@@ -33,12 +32,16 @@ const DashboardContent: FC = () => {
         </Col>
         <Col className={"card-tools-col"}>
           <Row gutter={16} className={"card-tools-wrapper"}>
-            {tools.map(({ name, icon, id, type }) => (
+            {aiTools.map(({ name, icon, id }) => (
               <ToolsCard
                 name={name}
                 description="Ask questions and get instant answers based on CE magazine archive."
                 icon={icon}
-                link={type === "agents" ? `/agents/${id}` : `/tools/${id}`}
+                link={
+                  name !== "TwoByTwoStewardship"
+                    ? `/agents/${id}`
+                    : `/tools/${id}`
+                }
               />
             ))}
           </Row>
