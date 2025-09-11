@@ -3,16 +3,13 @@
   background-color: unset;
   margin-top: 20px;
   height: calc(100vh - 124px);
+
   .ant-menu-item-divider {
     margin: 10px 20px;
   }
 
   .ant-menu-submenu-title {
-    padding-left: 49px !important;
-  }
-
-  .ant-menu-item {
-    padding-left: 60px !important;
+    padding-right: 14px;
   }
 
   .ant-menu-title-content {
@@ -65,6 +62,25 @@
   .ant-menu-submenu-open {
     .ant-menu.ant-menu-sub.ant-menu-inline {
       background: none;
+    }
+  }
+
+  .two-by-two-submenu {
+    .ant-menu-submenu-title {
+      padding-left: 48px !important;
+    }
+  }
+
+  .ant-menu-submenu.ant-menu-submenu-inline {
+    .ant-menu-submenu-title {
+      .submenu-title-wrapper {
+        display: flex;
+        gap: 5px;
+        .submenu-title {
+          font-size: 12px;
+          font-weight: 500;
+        }
+      }
     }
   }
 }

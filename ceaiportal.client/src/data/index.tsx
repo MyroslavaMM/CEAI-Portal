@@ -7,20 +7,24 @@ export const aiTools = [
     id: "1",
     icon: MagazineIcon,
     name: "Magazine Search Assistant",
+    type: "assistant",
   },
   {
     id: "2",
     icon: TwoByTwoAssistantIcon,
-    name: "TwoByTwo Assistant",
+    name: "Two By Two Assistant",
+    type: "assistant",
   },
   {
     id: "3",
-    icon: TwoByTwoAssistantIcon,
+    icon: menuIcon,
     name: "Grants Program Mapping Assistance",
+    type: "assistant",
   },
   {
     id: "4",
-    icon: menuIcon,
-    name: "TwoByTwoStewardship",
+    icon: TwoByTwoAssistantIcon,
+    name: "Two By Two Stewardship",
+    type: "tool",
   },
 ];

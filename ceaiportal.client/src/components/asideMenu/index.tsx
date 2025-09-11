@@ -5,6 +5,7 @@ import ExpandArrow from "../../../public/icons/select-arrow.svg";
 import type { MenuProps } from "antd";
 import { NavLink, useLocation } from "react-router-dom";
 import { aiTools } from "../../data";
+import TwoByTwoAssistantIcon from "../../../public/icons/TwoByTwo.png";
 
 type MenuItem = Required<MenuProps>["items"][number];
 
@@ -12,36 +13,73 @@ const items: MenuItem[] = [
   {
     key: "aiTools",
     label: "AI Tools",
-    children: aiTools?.map(({ id, name, icon }) => ({
-      key: `/agents/${id}`,
-      label: (
-        <NavLink to={`/agents/${id}`} className={"menu-link"}>
-          <Image
-            width={20}
-            height={20}
-            preview={false}
-            src={icon}
-            className={"menu-icon"}
-          />
-          {name}
-        </NavLink>
-      ),
-    })),
+    children: [
+      ...aiTools
+        .filter(({ name }) => !name.startsWith("Two By Two"))
+        .map(({ id, name, icon }) => ({
+          key: `/agents/${id}`,
+          label: (
+            <NavLink to={`/agents/${id}`} className={"menu-link"}>
+              <Image
+                width={20}
+                height={20}
+                preview={false}
+                src={icon}
+                className={"menu-icon"}
+              />
+              {name}
+            </NavLink>
+          ),
+        })),
+      {
+        key: "twoByTwo",
+        className: "two-by-two-submenu",
+        label: (
+          <div className={"submenu-title-wrapper"}>
+            <Image
+              width={20}
+              height={20}
+              preview={false}
+              src={TwoByTwoAssistantIcon}
+              className={"menu-icon"}
+            />
+            <span className={"submenu-title"}>Two By Two</span>
+          </div>
+        ),
+        children: aiTools
+          .filter(({ name }) => name.startsWith("Two By Two"))
+          .map(({ name, id, type }) => ({
+            key: type === "assistant" ? `/agents/${id}` : `/tools/${id}`,
+            label: (
+              <NavLink
+                to={type === "assistant" ? `/agents/${id}` : `/tools/${id}`}
+                className={"menu-link submenu-link"}
+              >
+                {name.replace("Two By Two ", "")}{" "}
+              </NavLink>
+            ),
+          })),
+      },
+    ],
   },
 ];
 
 const AsideMenu: FC = () => {
   const location = useLocation();
-  const [selectedKeys, setSelectedKeys] = useState<string[]>([]);
   const [openKeys, setOpenKeys] = useState<string[]>([]);
+  const [selectedKeys, setSelectedKeys] = useState<string[]>([]);
 
   useEffect(() => {
-    setSelectedKeys([location.pathname]);
+    const path = location.pathname;
 
-    if (location.pathname.startsWith("/agents")) {
-      setOpenKeys(["aiTools"]);
-    } else if (location.pathname.startsWith("/tools")) {
-      setOpenKeys(["tools"]);
+    setSelectedKeys([path]);
+
+    if (path.startsWith("/agents/") || path.startsWith("/tools/")) {
+      if (path.includes("tools")) {
+        setOpenKeys(["twoByTwo", "aiTools"]);
+      } else {
+        setOpenKeys(["aiTools"]);
+      }
     }
   }, [location]);
 
@@ -52,7 +90,7 @@ const AsideMenu: FC = () => {
       items={items}
       selectedKeys={selectedKeys}
       openKeys={openKeys}
-      onOpenChange={(keys) => setOpenKeys(keys)}
+      onOpenChange={(keys) => setOpenKeys(keys as string[])}
       expandIcon={({ isOpen }) => (
         <Image
           preview={false}
@@ -64,7 +102,7 @@ const AsideMenu: FC = () => {
           }}
         />
       )}
-    ></Menu>
+    />
   );
 };
 
