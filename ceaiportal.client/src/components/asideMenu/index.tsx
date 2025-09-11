@@ -27,7 +27,7 @@ const items: MenuItem[] = [
                 src={icon}
                 className={"menu-icon"}
               />
-              {name}
+              <div className={"menu-item-name"}>{name}</div>
             </NavLink>
           ),
         })),
@@ -55,7 +55,9 @@ const items: MenuItem[] = [
                 to={type === "assistant" ? `/agents/${id}` : `/tools/${id}`}
                 className={"menu-link submenu-link"}
               >
-                {name.replace("Two By Two ", "")}{" "}
+                <div className={"menu-item-name"}>
+                  {name.replace("Two By Two ", "")}{" "}
+                </div>
               </NavLink>
             ),
           })),
@@ -90,7 +92,9 @@ const AsideMenu: FC = () => {
       items={items}
       selectedKeys={selectedKeys}
       openKeys={openKeys}
-      onOpenChange={(keys) => setOpenKeys(keys as string[])}
+      onOpenChange={(keys) => (
+        setOpenKeys(keys as string[]), console.log(keys)
+      )}
       expandIcon={({ isOpen }) => (
         <Image
           preview={false}

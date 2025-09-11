@@ -39,6 +39,13 @@
     gap: 5px;
     font-size: 12px;
 
+    .menu-item-name {
+      flex: 1;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
+
     &.active {
       font-weight: 800;
     }
@@ -46,6 +53,7 @@
     .ant-image {
       display: flex;
       align-items: center;
+      flex-shrink: 0;
     }
   }
 
