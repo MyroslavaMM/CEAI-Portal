@@ -65,7 +65,12 @@
     }
   }
 
-  .two-by-two-submenu {
+  .two-by-two-submenu.ant-menu-submenu.ant-menu-submenu-inline {
+    &.ant-menu-submenu-open.ant-menu-submenu-selected {
+      span.submenu-title {
+        font-weight: 700;
+      }
+    }
     .ant-menu-submenu-title {
       padding-left: 48px !important;
     }
