@@ -224,7 +224,16 @@ const EmailModal: FC<{
 
   const handleSave = () => {
     setBodyText(bodyEditor?.getHTML());
+    onClose();
     console.log(setSubjectText);
+  };
+
+  const handleCancel = () => {
+    onClose();
+  };
+
+  const handleSend = () => {
+    onClose();
   };
 
   const bodyEditor = useEditor({
@@ -261,14 +270,14 @@ const EmailModal: FC<{
       footer={
         <Row style={{ justifyContent: "space-between", gap: 10 }}>
           <Row style={{ gap: 10 }}>
-            <Button onClick={onClose} style={{ marginRight: 8 }}>
+            <Button onClick={handleCancel} style={{ marginRight: 8 }}>
               Cancel
             </Button>
             <Button onClick={handleSave} icon={<SaveOutlined />}>
               Save
             </Button>
           </Row>
-          <Button type="primary" icon={<SendOutlined />}>
+          <Button type="primary" icon={<SendOutlined />} onClick={handleSend}>
             Send
           </Button>
         </Row>
