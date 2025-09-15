@@ -1,0 +1,28 @@
+.floating-input {
+  position: relative;
+  margin: 5px 0 0 0;
+}
+
+.floating-input input {
+  height: 40px;
+  padding: 12px 12px 0 0;
+}
+
+.floating-input label {
+  position: absolute;
+  top: 12px;
+  left: 5px;
+  color: #aaa;
+  font-size: 14px;
+  pointer-events: none;
+  transition: all 0.2s ease;
+}
+
+.floating-input.active label {
+  top: -10px;
+  left: 0;
+  font-size: 12px;
+  color: #7b7d7c;
+  background: white;
+  padding: 0;
+}

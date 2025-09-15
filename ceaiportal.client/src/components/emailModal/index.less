@@ -1,12 +1,117 @@
-.ant-modal-body {
-  max-height: 531px;
-  overflow-y: scroll;
+.custom-modal {
+  .ant-modal-header {
+    margin-bottom: 12px;
+  }
+  .ant-modal-content {
+    border-radius: 16px;
+  }
+
+  .ant-modal-footer {
+    margin-top: 16px;
+  }
+
+  .ant-typography-edit-content {
+    margin-left: 12px;
+  }
+
+  .ant-form-item-label {
+    padding: 0;
+  }
+
+  .email-form-input {
+    background: #ffffff;
+    border-top: 0;
+    border-right: 0;
+    border-left: 0;
+    border-radius: 0;
+    padding-left: 3px;
+    padding-top: 0;
+    border-color: rgba(5, 5, 5, 0.06);
+
+    &:focus-within {
+      box-shadow: none;
+    }
+  }
+  .email-details-wrapper {
+    flex-direction: column;
+    flex-wrap: nowrap;
+    max-height: 250px;
+    overflow-y: scroll;
+    gap: 4px;
+    .email-subject {
+      font-size: 12px;
+      color: #7b7d7c;
+      font-weight: 500;
+    }
+
+    .control-group {
+      padding: 0 0 10px 0;
+      width: 100%;
+      z-index: 9999;
+
+      .button-group {
+        button {
+          height: 25px;
+          padding: 4px 9px;
+          min-width: 30px;
+          font-size: 12px;
+          box-shadow: none;
+          background: #ffffff;
+          border: 1px solid #d9d9d9;
+        }
+      }
+    }
+
+    .tiptap.ProseMirror {
+      padding: 0 12px 0 0 !important;
+      border: none !important;
+
+      &:focus-visible {
+        outline: none;
+      }
+    }
+
+    .email-details-text {
+      width: 100%;
+    }
+  }
+
+  .email-form-item {
+    margin-bottom: 15px;
+    label {
+      font-size: 12px;
+      color: #7b7d7c;
+    }
+  }
+
+  .email-form {
+    width: 100%;
+  }
+  form {
+    width: 100%;
+  }
+
+  button .ant-image {
+    display: flex;
+  }
 }
 
-.ant-modal-footer {
-  margin-top: 16px;
-}
+.bg-dropdown {
+  .ant-dropdown-menu {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 6px;
 
-.ant-typography-edit-content {
-  margin-left: 12px;
+    .ant-dropdown-menu-item {
+      border-radius: 50%;
+      height: 20px;
+      width: 20px;
+      button.bg-button {
+        border-radius: 50%;
+        height: 20px;
+        width: 20px;
+        min-width: unset;
+      }
+    }
+  }
 }

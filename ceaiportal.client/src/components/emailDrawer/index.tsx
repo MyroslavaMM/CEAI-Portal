@@ -26,12 +26,12 @@ import Underline from "@tiptap/extension-underline";
 
 const { Paragraph, Text } = Typography;
 
-const htmlContent = `
+export const htmlContent = `
 <div style="font-family: Arial, sans-serif; line-height: 1.6">
   <p style="margin: 0 0 16px 0;">Hi <strong>Mr. Sullivan</strong>,</p>
 
   <p style="margin: 0 0 16px 0;">
-    I wanted to take a moment to <span font-weight: bold;">thank you once again</span> for your generous gift on
+    I wanted to take a moment to <span style="font-weight: bold;">thank you once again</span> for your generous gift on
     <span style="font-style: italic;">July 29</span>. Your support continues to be a vital part of building vibrant Catholic communities in places that need it most.
     I also appreciated our recent call where we got to share some updates – I hope you found it meaningful.
   </p>
@@ -258,10 +258,11 @@ const MenuBar = ({ editor }: { editor: Editor }) => {
   );
 };
 
-const EmailDrawer: FC<{ open: boolean; onClose: () => void }> = ({
-  open,
-  onClose,
-}) => {
+const EmailDrawer: FC<{
+  open: boolean;
+  onClose: () => void;
+  setOpenModal: () => void;
+}> = ({ open, onClose, setOpenModal }) => {
   const [editMode, setEditMode] = useState(false);
   const [activeEditor, setActiveEditor] = useState<any>(null);
   const [subjectText, setSubjectText] = useState(
@@ -277,7 +278,6 @@ const EmailDrawer: FC<{ open: boolean; onClose: () => void }> = ({
         style: "min-height: 60px; border: 1px solid #ddd; padding: 6px;",
       },
     },
-    onFocus: ({ editor }) => setActiveEditor(editor),
   });
 
   const bodyEditor = useEditor({
@@ -295,10 +295,15 @@ const EmailDrawer: FC<{ open: boolean; onClose: () => void }> = ({
     setEditMode(false);
     const subjectHTML = subjectEditor?.getHTML();
     const bodyHTML = bodyEditor?.getHTML();
-    setBodyText(bodyHTML);
-    setSubjectText(subjectHTML);
+    setBodyText(bodyEditor?.getHTML());
+    setSubjectText(subjectEditor?.getHTML());
     console.log("Subject HTML:", subjectHTML);
     console.log("Body HTML:", bodyHTML);
+  };
+
+  const onEdit = () => {
+    setOpenModal();
+    // setEditMode(true);
   };
 
   return (
@@ -329,7 +334,7 @@ const EmailDrawer: FC<{ open: boolean; onClose: () => void }> = ({
             <Button
               type="primary"
               icon={<EditOutlined />}
-              onClick={() => setEditMode(true)}
+              onClick={() => onEdit()}
             >
               Edit
             </Button>

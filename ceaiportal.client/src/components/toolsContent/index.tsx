@@ -5,6 +5,7 @@ import { DoubleRightOutlined } from "@ant-design/icons";
 import EmailDrawer from "../emailDrawer";
 import { NavLink } from "react-router-dom";
 import dayjs from "dayjs";
+import EmailModal from "../emailModal";
 
 const { Paragraph } = Typography;
 
@@ -82,6 +83,7 @@ const data = [
 
 const ToolsContent: FC = () => {
   const [openDrawer, setOpenDrawer] = useState<boolean>(false);
+  const [openModal, setOpenModal] = useState<boolean>(false);
 
   const columns = [
     {
@@ -111,6 +113,8 @@ const ToolsContent: FC = () => {
       title: "Workflow Execution ID",
       dataIndex: "workflowExecutionId",
       key: "workflowExecutionId",
+      sorter: (a: any, b: any) =>
+        a.workflowExecutionId.localeCompare(b.workflowExecutionId),
     },
     {
       title: "Execution Date",
@@ -222,6 +226,16 @@ const ToolsContent: FC = () => {
     },
   ];
 
+  const onCloseModal = () => {
+    setOpenModal(false);
+    setOpenDrawer(true);
+  };
+
+  const onOpenModal = () => {
+    setOpenModal(true);
+    setOpenDrawer(false);
+  };
+
   return (
     <Row className={"tools-table-wrapper"}>
       <Table
@@ -233,7 +247,12 @@ const ToolsContent: FC = () => {
         scroll={{ x: true }}
         bordered
       />
-      <EmailDrawer open={openDrawer} onClose={() => setOpenDrawer(false)} />
+      <EmailDrawer
+        open={openDrawer}
+        onClose={() => setOpenDrawer(false)}
+        setOpenModal={onOpenModal}
+      />
+      <EmailModal open={openModal} onClose={onCloseModal} width={840} />
     </Row>
   );
 };
