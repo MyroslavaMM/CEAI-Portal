@@ -349,12 +349,22 @@ const EmailDrawer: FC<{
           <Divider />
         </>
       )}
+      <Row className={"from-to-block"}>
+        <Text className={"from-to-title"}>From:</Text>
+        <Text>exampleFrom@email.com</Text>
+      </Row>
+      <Row className={"from-to-block"}>
+        <Text className={"from-to-title"}>To:</Text>
+        <Text>exampleTo@email.com</Text>
+      </Row>
+      <Divider className={"email-details-divider"} />
+
       <Row className={"email-details-wrapper"}>
         <Text className={"email-subject"}>Subject:</Text>
         {editMode ? (
           <EditorContent editor={subjectEditor} />
         ) : (
-          <Paragraph className={"email-details-text"}>
+          <Paragraph className={"email-details-text subject"}>
             {parse(subjectText)}
           </Paragraph>
         )}

@@ -1,3 +1,17 @@
+.from-to-block {
+  gap: 8px;
+  margin-bottom: 15px;
+  border-radius: 12px;
+  padding: 10px 14px;
+  box-shadow:
+    rgba(0, 0, 0, 0.1) 0px 0px 5px 0px,
+    rgba(0, 0, 0, 0.1) 0px 0px 1px 0px;
+
+  .from-to-title {
+    font-weight: 600;
+  }
+}
+
 .email-details-wrapper {
   flex-direction: column;
   gap: 10px;
@@ -6,6 +20,10 @@
   .email-details-text {
     margin-bottom: 0;
     font-size: 14px;
+
+    &.subject p {
+      margin: 0;
+    }
   }
   .email-subject {
     font-weight: 600;
@@ -21,7 +39,6 @@
   background-color: #fff;
   position: sticky;
   top: 0;
-  z-index: 99999;
 
   .button-group {
     display: flex;
@@ -48,6 +65,16 @@ button.toolbar-dropdown-item {
     .ant-dropdown-menu-item {
       padding: 0;
     }
+  }
+}
+
+.edit-email-drawer {
+  .email-details-wrapper {
+    box-shadow:
+      rgba(0, 0, 0, 0.1) 0px 0px 5px 0px,
+      rgba(0, 0, 0, 0.1) 0px 0px 1px 0px;
+    padding: 10px 14px;
+    border-radius: 12px;
   }
 }
 

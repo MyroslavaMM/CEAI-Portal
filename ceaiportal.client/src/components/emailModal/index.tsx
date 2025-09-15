@@ -134,9 +134,7 @@ export const MenuBar = ({ editor }: { editor: Editor }) => {
         </Dropdown>
         <Dropdown menu={{ items: fontSizeItems(editor) }}>
           <Button>
-            {editorState?.fontSize?.length === 0
-              ? "14px"
-              : editorState?.fontSize}
+            {!editorState?.fontSize ? "14px" : editorState?.fontSize}
           </Button>
         </Dropdown>
         <Dropdown menu={{ items: textAlignItems(editor) }}>
