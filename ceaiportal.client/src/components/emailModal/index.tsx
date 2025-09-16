@@ -37,7 +37,6 @@ import {
 } from "@tiptap/react";
 
 import FloatingInput from "../floatingInput";
-import { htmlContent } from "../emailDrawer";
 
 const { Item } = Form;
 import { headerItems } from "./toolbarItemsLists/headerItems";
@@ -45,6 +44,7 @@ import { fontSizeItems } from "./toolbarItemsLists/fontSizeItems";
 import { textAlignItems } from "./toolbarItemsLists/textAlignItems";
 import { backgroundColorItems } from "./toolbarItemsLists/backgroundColorItems";
 import { textColorItems } from "./toolbarItemsLists/textColorItems";
+import { useGeneralContext } from "../../context/GeneralContext";
 
 export const MenuBar = ({ editor }: { editor: Editor }) => {
   const editorState = useEditorState({
@@ -216,16 +216,29 @@ const EmailModal: FC<{
   onClose: () => void;
   width?: number;
 }> = ({ open, onClose, width }) => {
-  const [subjectText, setSubjectText] = useState(
-    "Your Gift is Bringing New Hope to Brownsville’s Catholic Community"
-  );
-  const [bodyText, setBodyText] = useState(htmlContent);
+  const {
+    emailBody,
+    setEmailBody,
+    emailFrom,
+    setEmailFrom,
+    emailSubject,
+    setEmailSubject,
+    setEmailTo,
+    emailTo,
+  } = useGeneralContext();
   const [activeEditor, setActiveEditor] = useState<any>(null);
+  const [subjectText, setSubjectText] = useState<string>(emailSubject);
+  const [bodyText, setBodyText] = useState<string>(emailBody);
+  const [emailDraftTo, setEmailDraftTo] = useState<string>(emailTo);
+  const [emailDraftFrom, setEmailDraftFrom] = useState<string>(emailFrom);
 
   const handleSave = () => {
-    setBodyText(bodyEditor?.getHTML());
+    setEmailBody(bodyEditor?.getHTML());
+    setEmailSubject(subjectText);
+    setEmailTo(emailDraftTo);
+    setEmailFrom(emailDraftFrom);
     onClose();
-    console.log(setSubjectText);
+    console.log(setBodyText);
   };
 
   const handleCancel = () => {
@@ -285,11 +298,29 @@ const EmailModal: FC<{
     >
       <Row>
         <Form layout={"vertical"} name={"email"}>
-          <Item className={"email-form-item"} name={"from"}>
-            <FloatingInput label="From" name={"from"} />
+          <Item
+            className={"email-form-item"}
+            name={"from"}
+            initialValue={emailDraftFrom}
+          >
+            <FloatingInput
+              label="From"
+              name={"from"}
+              onChange={(e) => setEmailDraftFrom(e.target.value)}
+              // value={emailDraftFrom}
+            />
           </Item>
-          <Item className={"email-form-item"} name={"to"}>
-            <FloatingInput label="To" name={"to"} />
+          <Item
+            className={"email-form-item"}
+            name={"to"}
+            initialValue={emailDraftTo}
+          >
+            <FloatingInput
+              label="To"
+              name={"to"}
+              onChange={(e) => setEmailDraftTo(e.target.value)}
+              value={emailDraftTo}
+            />
           </Item>
 
           <Item
@@ -297,7 +328,11 @@ const EmailModal: FC<{
             name={"subject"}
             initialValue={subjectText}
           >
-            <FloatingInput label="Subject" name={"subject"} />
+            <FloatingInput
+              label="Subject"
+              name={"subject"}
+              onChange={(e) => setSubjectText(e.target.value)}
+            />
           </Item>
           <Row className={"email-details-wrapper"}>
             <MenuBar editor={activeEditor} />

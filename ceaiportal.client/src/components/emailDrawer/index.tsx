@@ -1,7 +1,7 @@
 import "./index.less";
 import parse from "html-react-parser";
 import type { MenuProps } from "antd";
-import { useState, type FC } from "react";
+import { useEffect, useState, type FC } from "react";
 import { Drawer, Row, Typography, Button, Divider, Dropdown } from "antd";
 import {
   SendOutlined,
@@ -23,42 +23,9 @@ import {
 } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import Underline from "@tiptap/extension-underline";
+import { useGeneralContext } from "../../context/GeneralContext";
 
 const { Paragraph, Text } = Typography;
-
-export const htmlContent = `
-<div style="font-family: Arial, sans-serif; line-height: 1.6">
-  <p style="margin: 0 0 16px 0;">Hi <strong>Mr. Sullivan</strong>,</p>
-
-  <p style="margin: 0 0 16px 0;">
-    I wanted to take a moment to <span style="font-weight: bold;">thank you once again</span> for your generous gift on
-    <span style="font-style: italic;">July 29</span>. Your support continues to be a vital part of building vibrant Catholic communities in places that need it most.
-    I also appreciated our recent call where we got to share some updates – I hope you found it meaningful.
-  </p>
-
-  <p style="margin: 0 0 16px 0;">
-    I thought you might be inspired by a story from <span style="font-weight: bold;">Brownsville, Texas</span>, part of one of the poorest dioceses in the country.
-    Thanks to supporters like you, Catholics from across the U.S. united their prayers and resources to build a new church there.
-    The diocese, home to many Latino immigrants living below the poverty line, is seeing hope and faith flourish as a result.
-  </p>
-
-  <p style="margin: 0 0 16px 0;">
-    This new church isn’t just <span style="font-style: italic;">bricks and mortar</span>; it’s a beacon of community and sanctuary.
-    It demonstrates how your partnership in this mission transforms lives and strengthens faith where challenges are greatest.
-    We’ll keep you updated on similar stories from <span style="font-weight: bold;">Mundelein</span> and also look forward to sharing special moments from the upcoming
-    <span style="text-decoration: underline;">seminarian dinner</span>—an event that celebrates the next generation of priests who your generosity helps prepare.
-  </p>
-
-  <p style="margin: 0 0 16px 0;">
-    Thank you again for walking this journey with us. <span>Your friendship and commitment mean the world.</span>
-  </p>
-
-  <p style="margin: 0;">
-    Warm blessings,<br>
-    <span style="font-weight: bold;">Catholic Extension Society</span>
-  </p>
-</div>
-`;
 
 const MenuBar = ({ editor }: { editor: Editor }) => {
   const editorState = useEditorState({
@@ -263,12 +230,20 @@ const EmailDrawer: FC<{
   onClose: () => void;
   setOpenModal: () => void;
 }> = ({ open, onClose, setOpenModal }) => {
+  const { emailBody, emailFrom, emailSubject, emailTo } = useGeneralContext();
   const [editMode, setEditMode] = useState(false);
   const [activeEditor, setActiveEditor] = useState<any>(null);
-  const [subjectText, setSubjectText] = useState(
-    "<p>Your Gift is Bringing New Hope to Brownsville’s Catholic Community</p>"
-  );
-  const [bodyText, setBodyText] = useState(htmlContent);
+  const [subjectText, setSubjectText] = useState("");
+  const [bodyDraftText, setBodyDraftText] = useState("");
+  const [emailDraftTo, setEmailDraftTo] = useState("");
+  const [emailDraftFrom, setEmailDraftFrom] = useState("");
+
+  useEffect(() => {
+    setBodyDraftText(emailBody);
+    setSubjectText(emailSubject);
+    setEmailDraftTo(emailTo);
+    setEmailDraftFrom(emailFrom);
+  }, [emailBody, emailFrom, emailSubject, emailTo]);
 
   const subjectEditor = useEditor({
     extensions: [StarterKit, Underline],
@@ -282,7 +257,7 @@ const EmailDrawer: FC<{
 
   const bodyEditor = useEditor({
     extensions: [StarterKit, Underline],
-    content: bodyText,
+    content: bodyDraftText,
     editorProps: {
       attributes: {
         style: "min-height: 200px; border: 1px solid #ddd; padding: 12px;",
@@ -293,12 +268,9 @@ const EmailDrawer: FC<{
 
   const handleSave = () => {
     setEditMode(false);
-    const subjectHTML = subjectEditor?.getHTML();
-    const bodyHTML = bodyEditor?.getHTML();
-    setBodyText(bodyEditor?.getHTML());
-    setSubjectText(subjectEditor?.getHTML());
-    console.log("Subject HTML:", subjectHTML);
-    console.log("Body HTML:", bodyHTML);
+    // const subjectHTML = subjectEditor?.getHTML();
+    // const bodyHTML = bodyEditor?.getHTML();
+    // setBodyText(bodyEditor?.getHTML());
   };
 
   const onEdit = () => {
@@ -351,11 +323,11 @@ const EmailDrawer: FC<{
       )}
       <Row className={"from-to-block"}>
         <Text className={"from-to-title"}>From:</Text>
-        <Text>exampleFrom@email.com</Text>
+        <Text>{emailDraftFrom}</Text>
       </Row>
       <Row className={"from-to-block"}>
         <Text className={"from-to-title"}>To:</Text>
-        <Text>exampleTo@email.com</Text>
+        <Text>{emailDraftTo}</Text>
       </Row>
       <Divider className={"email-details-divider"} />
 
@@ -365,7 +337,7 @@ const EmailDrawer: FC<{
           <EditorContent editor={subjectEditor} />
         ) : (
           <Paragraph className={"email-details-text subject"}>
-            {parse(subjectText)}
+            {parse(emailSubject)}
           </Paragraph>
         )}
       </Row>
@@ -380,7 +352,7 @@ const EmailDrawer: FC<{
           <>
             <div
               className={"email-details-text"}
-              dangerouslySetInnerHTML={{ __html: bodyText }}
+              dangerouslySetInnerHTML={{ __html: bodyDraftText }}
             />
           </>
         )}

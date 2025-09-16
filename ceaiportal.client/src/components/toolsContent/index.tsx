@@ -6,8 +6,44 @@ import EmailDrawer from "../emailDrawer";
 import { NavLink } from "react-router-dom";
 import dayjs from "dayjs";
 import EmailModal from "../emailModal";
+import { useGeneralContext } from "../../context/GeneralContext";
+import parse from "html-react-parser";
 
 const { Paragraph } = Typography;
+
+export const htmlContent = `
+<div style="font-family: Arial, sans-serif; line-height: 1.6">
+  <p style="margin: 0 0 16px 0;">Hi <strong>Mr. Sullivan</strong>,</p>
+
+  <p style="margin: 0 0 16px 0;">
+    I wanted to take a moment to <span style="font-weight: bold;">thank you once again</span> for your generous gift on
+    <span style="font-style: italic;">July 29</span>. Your support continues to be a vital part of building vibrant Catholic communities in places that need it most.
+    I also appreciated our recent call where we got to share some updates – I hope you found it meaningful.
+  </p>
+
+  <p style="margin: 0 0 16px 0;">
+    I thought you might be inspired by a story from <span style="font-weight: bold;">Brownsville, Texas</span>, part of one of the poorest dioceses in the country.
+    Thanks to supporters like you, Catholics from across the U.S. united their prayers and resources to build a new church there.
+    The diocese, home to many Latino immigrants living below the poverty line, is seeing hope and faith flourish as a result.
+  </p>
+
+  <p style="margin: 0 0 16px 0;">
+    This new church isn’t just <span style="font-style: italic;">bricks and mortar</span>; it’s a beacon of community and sanctuary.
+    It demonstrates how your partnership in this mission transforms lives and strengthens faith where challenges are greatest.
+    We’ll keep you updated on similar stories from <span style="font-weight: bold;">Mundelein</span> and also look forward to sharing special moments from the upcoming
+    <span style="text-decoration: underline;">seminarian dinner</span>—an event that celebrates the next generation of priests who your generosity helps prepare.
+  </p>
+
+  <p style="margin: 0 0 16px 0;">
+    Thank you again for walking this journey with us. <span>Your friendship and commitment mean the world.</span>
+  </p>
+
+  <p style="margin: 0;">
+    Warm blessings,<br>
+    <span style="font-weight: bold;">Catholic Extension Society</span>
+  </p>
+</div>
+`;
 
 interface RowData {
   id: number;
@@ -15,75 +51,73 @@ interface RowData {
   emailOptions: any;
 }
 
-const data = [
-  {
-    id: 1,
-    contactId: "957946",
-    workflowExecutionId: "9b14267e-2143-4bf9-90e8-a3b90531d4e9",
-    executionDate: "03.08.2025 06:00:40",
-    opportunityScore: 87,
-    recommendedEmailAction: "Email Cultivation",
-    keyDataPoints: [
-      "Total gifts: 360, totaling $625,619.16, average $1,737.83",
-      "Last gift on 2025-07-29 for $500, recent and significant",
-      "Email sent count 2, responded once showing good email engagement",
-      "Recent staff notes include thank you call and plans to send news about Mundelein or seminarian dinner",
-      "Engaged donor with high giving history and recent positive communication",
-    ],
-    emailPersonalizationNotes:
-      "Reference recent gift and thank you call. Include personalized updates about Mundelein or seminarian news as per staff notes to deepen engagement. Highlight impact of gift and upcoming events relevant to donor interests. Use appreciative and warm tone acknowledging long-term support.",
-    emailStrategicRationale:
-      "Mr. Sullivan is a highly engaged major donor with a very strong giving history and recent donation. He has shown positive email response and was recently personally thanked via call. An email with cultivation content including personalized news about Mundelein or upcoming seminarian dinner will reinforce his connection and encourage further involvement. Timing this in a way to build on recent contacts is optimal to maintain engagement momentum.",
-    emailTiming: "11.08.2025 00:00:00",
-    optimalEmailExamples: "2700,2727,2716",
-    emailOptions: [
-      {
-        subject:
-          "Your Gift is Bringing New Hope to Brownsville’s Catholic Community",
-        body: "Hi Mr. Sullivan, I wanted to take a moment to thank you once again for your generous gift on July 29. Your support continues to be a vital part of building vibrant Catholic communities in places that need it most. I also appreciated our recent call where we got to share some updates – I hope you found it meaningful.I thought you might be inspired by a story from Brownsville, Texas, part of one of the poorest dioceses in the country. Thanks to supporters like you, Catholics from across the U.S. united their prayers and resources to build a new church there. The diocese, home to many Latino immigrants living below the poverty line, is seeing hope and faith flourish as a result.This new church isn’t just bricks and mortar; it’s a beacon of community and sanctuary. It demonstrates how your partnership in this mission transforms lives and strengthens faith where challenges are greatest. We’ll keep you updated on similar stories from Mundelein and also look forward to sharing special moments from the upcoming seminarian dinner—an event that celebrates the next generation of priests who your generosity helps prepare. Thank you again for walking this journey with us. Your friendship and commitment mean the world. Warm blessings,Catholic Extension Society",
-      },
-    ],
-
-    workflowStatus: "in progress",
-    createdDate: "02.08.2025 06:00:40",
-  },
-  {
-    id: 2,
-    contactId: "1018371",
-    workflowExecutionId: "bc5f27b1-ad8c-4ce1-b489-bdbca08d3f00",
-    executionDate: "04.08.2025 06:13:28",
-    opportunityScore: 55,
-    recommendedEmailAction:
-      "Send a personalized stewardship email appreciation recognizing the donor's recent large gift and long-term commitment, emphasizing the impact of their support on mission and community, and inviting deeper engagement.",
-    keyDataPoints: [
-      "75 gifts totaling $75,950 since 2010",
-      "Most recent gift of $2,000 on 2025-07-29",
-      "No prior emails sent or responded to",
-      "No previous email stewardship despite high donation history",
-      "Personalized calls and letters already attempted",
-      "High value donor with deep mission engagement potential",
-    ],
-    emailPersonalizationNotes:
-      "Reference recent gift and long-term generosity, highlight specific mission stories like Sister Mary Lisa Renfer’s work to connect donation impact, acknowledge prior personal contact (letter and voicemail), and invite ongoing communication and updates.",
-    emailStrategicRationale:
-      "The donor is a major donor with significant giving history but zero prior email stewardship. Engaging him now via personalized appreciation emails will acknowledge his importance, build trust, and open pathways for further email engagement and cultivation. This approach fills an email stewardship gap and leverages his demonstrated giving generosity and responsiveness to other outreach channels.",
-    emailTiming: "11.08.2025 13:00:00",
-    optimalEmailExamples: "2700,2704,2703",
-    emailOptions: [
-      {
-        subject:
-          "Your Gift is Bringing New Hope to Brownsville’s Catholic Community",
-        body: "Hi Mr. Sullivan, I wanted to take a moment to thank you once again for your generous gift on July 29. Your support continues to be a vital part of building vibrant Catholic communities in places that need it most. I also appreciated our recent call where we got to share some updates – I hope you found it meaningful.I thought you might be inspired by a story from Brownsville, Texas, part of one of the poorest dioceses in the country. Thanks to supporters like you, Catholics from across the U.S. united their prayers and resources to build a new church there. The diocese, home to many Latino immigrants living below the poverty line, is seeing hope and faith flourish as a result.This new church isn’t just bricks and mortar; it’s a beacon of community and sanctuary. It demonstrates how your partnership in this mission transforms lives and strengthens faith where challenges are greatest. We’ll keep you updated on similar stories from Mundelein and also look forward to sharing special moments from the upcoming seminarian dinner—an event that celebrates the next generation of priests who your generosity helps prepare. Thank you again for walking this journey with us. Your friendship and commitment mean the world. Warm blessings,Catholic Extension Society",
-      },
-    ],
-
-    createdDate: "01.08.2025 06:13:28",
-  },
-];
-
 const ToolsContent: FC = () => {
   const [openDrawer, setOpenDrawer] = useState<boolean>(false);
   const [openModal, setOpenModal] = useState<boolean>(false);
+  const { emailBody, emailSubject } = useGeneralContext();
+  const data = [
+    {
+      id: 1,
+      contactId: "957946",
+      workflowExecutionId: "9b14267e-2143-4bf9-90e8-a3b90531d4e9",
+      executionDate: "03.08.2025 06:00:40",
+      opportunityScore: 87,
+      recommendedEmailAction: "Email Cultivation",
+      keyDataPoints: [
+        "Total gifts: 360, totaling $625,619.16, average $1,737.83",
+        "Last gift on 2025-07-29 for $500, recent and significant",
+        "Email sent count 2, responded once showing good email engagement",
+        "Recent staff notes include thank you call and plans to send news about Mundelein or seminarian dinner",
+        "Engaged donor with high giving history and recent positive communication",
+      ],
+      emailPersonalizationNotes:
+        "Reference recent gift and thank you call. Include personalized updates about Mundelein or seminarian news as per staff notes to deepen engagement. Highlight impact of gift and upcoming events relevant to donor interests. Use appreciative and warm tone acknowledging long-term support.",
+      emailStrategicRationale:
+        "Mr. Sullivan is a highly engaged major donor with a very strong giving history and recent donation. He has shown positive email response and was recently personally thanked via call. An email with cultivation content including personalized news about Mundelein or upcoming seminarian dinner will reinforce his connection and encourage further involvement. Timing this in a way to build on recent contacts is optimal to maintain engagement momentum.",
+      emailTiming: "11.08.2025 00:00:00",
+      optimalEmailExamples: "2700,2727,2716",
+      emailOptions: [
+        {
+          subject: emailSubject,
+          body: parse(emailBody),
+        },
+      ],
+
+      workflowStatus: "in progress",
+      createdDate: "02.08.2025 06:00:40",
+    },
+    {
+      id: 2,
+      contactId: "1018371",
+      workflowExecutionId: "bc5f27b1-ad8c-4ce1-b489-bdbca08d3f00",
+      executionDate: "04.08.2025 06:13:28",
+      opportunityScore: 55,
+      recommendedEmailAction:
+        "Send a personalized stewardship email appreciation recognizing the donor's recent large gift and long-term commitment, emphasizing the impact of their support on mission and community, and inviting deeper engagement.",
+      keyDataPoints: [
+        "75 gifts totaling $75,950 since 2010",
+        "Most recent gift of $2,000 on 2025-07-29",
+        "No prior emails sent or responded to",
+        "No previous email stewardship despite high donation history",
+        "Personalized calls and letters already attempted",
+        "High value donor with deep mission engagement potential",
+      ],
+      emailPersonalizationNotes:
+        "Reference recent gift and long-term generosity, highlight specific mission stories like Sister Mary Lisa Renfer’s work to connect donation impact, acknowledge prior personal contact (letter and voicemail), and invite ongoing communication and updates.",
+      emailStrategicRationale:
+        "The donor is a major donor with significant giving history but zero prior email stewardship. Engaging him now via personalized appreciation emails will acknowledge his importance, build trust, and open pathways for further email engagement and cultivation. This approach fills an email stewardship gap and leverages his demonstrated giving generosity and responsiveness to other outreach channels.",
+      emailTiming: "11.08.2025 13:00:00",
+      optimalEmailExamples: "2700,2704,2703",
+      emailOptions: [
+        {
+          subject: emailSubject,
+          body: parse(emailBody),
+        },
+      ],
+
+      createdDate: "01.08.2025 06:13:28",
+    },
+  ];
 
   const columns = [
     {
